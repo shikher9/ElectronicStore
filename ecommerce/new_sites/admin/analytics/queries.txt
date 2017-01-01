@@ -1,0 +1,107 @@
+
+
+Data for product dimension table -
+
+select pioneers.product.productId,pioneers.product.type,pioneers.product.price,pioneers.product.name,pioneers.discount.perc from pioneers.product,pioneers.discount where pioneers.product.discountId = pioneers.discount.discountId;
+
+
+Data for customer dimension fact table -
+
+
+select pioneers.customer.customerId,pioneers.customer.firstName,pioneers.customer.lastName,pioneers.customer.gender,pioneers.customer.dob,pioneers.customer.contactNo, pioneers.userdata.email
+from pioneers.customer,pioneers.userdata where pioneers.customer.customerId = pioneers.userdata.customerId order by pioneers.customer.customerId;
+
+
+
+Data for location dimension table -
+
+select distinct(pioneers.address.zip),pioneers.address.city,pioneers.address.state from pioneers.address;
+
+Data for Calendar dimension table -
+
+select distinct(pioneers.orders.orderDate),DAYOFWEEK(pioneers.orders.orderDate),DAYOFMONTH(pioneers.orders.orderDate),MONTH(pioneers.orders.orderDate),YEAR(pioneers.orders.orderDate) from pioneers.orders;
+
+Data for Orders fact table.
+
+
+select cus.Customerkey,pro.Productkey,cal.Calendarkey,loc.Locationkey,ords.orderId,ords.orderTime,ords.orderDate,
+ords.quantity * (pro.price-(pro.price*(pro.discountPercent/100))) as revenue,ords.quantity  from pioneersanalytics.customer cus,pioneersanalytics.product pro,pioneersanalytics.calendar cal,
+pioneersanalytics.location loc,pioneers.orders ords,pioneers.customer cuspio,pioneers.address addr
+where cus.customerId = ords.customerId
+and pro.productId = ords.productId
+and cal.FullDate = ords.orderDate
+and cuspio.customerId = ords.orderId
+and cuspio.addressId = addr.addressId
+and loc.city = addr.city
+and loc.state = addr.state
+and loc.zip = addr.zip
+and loc.country = addr.country;
+
+Data for Feedback fact table
+
+select cus.Customerkey,pro.Productkey,cal.Calendarkey,fb.rating
+from pioneersanalytics.customer cus,pioneersanalytics.product pro,pioneersanalytics.calendar cal, pioneers.feedback fb, pioneers.feedbackinfo fbinfo
+where cus.customerId = fbinfo.customerId
+and pro.productId = fbinfo.productId
+and cal.FullDate = fb.dateOfFeedback
+and fbinfo.feedbackId = fb.feedbackId;
+
+
+
+
+POPULATE QUERIES
+
+insert into pioneersanalytics.product(product.productId,product.productType,product.price,product.name,product.discountPercent)
+select pioneers.product.productId,pioneers.product.type,pioneers.product.price,pioneers.product.name,pioneers.discount.perc
+from pioneers.product,pioneers.discount where pioneers.product.discountId = pioneers.discount.discountId;
+
+
+
+insert into pioneersanalytics.customer(customer.customerId,customer.firstName,customer.lastName,customer.gender,customer.dob,customer.contactNo,customer.email)
+select pioneers.customer.customerId,pioneers.customer.firstName,pioneers.customer.lastName,pioneers.customer.gender,pioneers.customer.dob,
+pioneers.customer.contactNo, pioneers.userdata.email
+from pioneers.customer,pioneers.userdata where pioneers.customer.customerId = pioneers.userdata.customerId order by pioneers.customer.customerId;
+
+
+
+insert into pioneersanalytics.location(location.zip,location.city,location.state,location.country)
+select distinct(pioneers.address.zip),pioneers.address.city,pioneers.address.state,pioneers.address.country from pioneers.address;
+
+
+
+insert into pioneersanalytics.calendar(calendar.FullDate,calendar.DayinWeek,calendar.DayinMonth,calendar.MonthinYear,calendar.YearNumber)
+select distinct(pioneers.orders.orderDate),DAYOFWEEK(pioneers.orders.orderDate),DAYOFMONTH(pioneers.orders.orderDate),MONTH(pioneers.orders.orderDate),
+YEAR(pioneers.orders.orderDate) from pioneers.orders;
+
+insert into orders(orders.Customerkey,orders.Productkey,orders.Calendarkey,orders.Locationkey,orders.orderId,orders.orderTime,orders.orderDate,orders.revenue,orders.quantitySold)
+select cus.Customerkey,pro.Productkey,cal.Calendarkey,loc.Locationkey,ords.orderId,ords.orderTime,ords.orderDate,
+ords.quantity * (pro.price-(pro.price*(pro.discountPercent/100))) as revenue,ords.quantity  from pioneersanalytics.customer cus,pioneersanalytics.product pro,pioneersanalytics.calendar cal,
+pioneersanalytics.location loc,pioneers.orders ords,pioneers.customer cuspio,pioneers.address addr
+where cus.customerId = ords.customerId
+and pro.productId = ords.productId
+and cal.FullDate = ords.orderDate
+and cuspio.customerId = ords.orderId
+and cuspio.addressId = addr.addressId
+and loc.city = addr.city
+and loc.state = addr.state
+and loc.zip = addr.zip
+and loc.country = addr.country;
+
+
+
+	insert into pioneersanalytics.feedback(feedback.Customerkey,feedback.Productkey,feedback.Calendarkey,feedback.rating)
+	select cus.Customerkey,pro.Productkey,cal.Calendarkey,fb.rating
+	from pioneersanalytics.customer cus,pioneersanalytics.product pro,pioneersanalytics.calendar cal, pioneers.feedback fb, pioneers.feedbackinfo fbinfo
+	where cus.customerId = fbinfo.customerId
+	and pro.productId = fbinfo.productId
+	and cal.FullDate = fb.dateOfFeedback
+	and fbinfo.feedbackId = fb.feedbackId;
+
+
+
+
+
+
+
+
+

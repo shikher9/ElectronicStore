@@ -1,0 +1,82 @@
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout-link {
+    color: white;
+    float: right;
+    padding-right: 20px;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    color: burlywood;
+}
+
+.settings-link {
+    color: white;
+    float: right;
+    padding-right: 20px;
+    text-decoration: none;
+}
+
+.settings-link:hover {
+    color: burlywood;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #828282;
+}
+
+.item-image-wrapper {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 300px;
+}
+
+.item-image {
+    height: 200px;
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+.item-details {
+    margin-left: 20px;
+}
+
+.item-name {
+    color: black;
+    margin: 15px 0px 15px 0px;
+    font-weight: bold;
+}
+
+.item-price {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.item-description {
+    color: black;
+    margin: 5px 0px 10px 0px;
+}
+
+.item-buy {
+    background: #2a73cb linear-gradient(to bottom, #2a73cb, #218acc);
+    border-radius: 60px;
+    box-shadow: 0px 1px 3px #666666;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+    border: solid #1f628d 0px;
+}
+
+.item-buy:hover {
+    background: #3cb0fd linear-gradient(to bottom, #3cb0fd, #3498db);
+}
+

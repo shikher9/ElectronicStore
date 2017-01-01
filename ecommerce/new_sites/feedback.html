@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/settings.css">
+        <title>Feedback</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar">
+                <div class="navbar-container">
+                    <a  href="feedback.html"> Feedback </a>  &nbsp; &nbsp;&nbsp; &nbsp;
+                    <a  href="products.php"> Products </a> &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+                    <a  href="products.php">Account</a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    <a  href="shoppingcart.php"> View Shopping Cart </a> &nbsp;&nbsp;&nbsp;
+                    <a  href="shoppingcart.php"> History </a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    <a  href="shoppingcart.php"> Customer Care &nbsp;&nbsp;&nbsp;&nbsp;
+                   <a class="logout-link" href="index1.html">Logout</a>
+                </div>
+            </div>
+        
+<div id="container" style="width:100%;">                                   
+  <div id="left" style="float:left; width:50%;"> <br><br>
+  <form action="feedback.php" method="post" style="padding-right:50px; padding-left:50px;">
+   <fieldset>
+        <br><br>
+        <legend> &nbsp; Your feedback is important to us!! &nbsp;</legend>
+            <label for="username-input" style="padding-left:30px">Enter your feedback</label><br> <br> &nbsp;  &nbsp;
+            <textarea rows="4" cols="50" name = "feedbackComment"></textarea><br>
+            <br>
+            <label style="padding-left:30px">Choose Rating:</label>     
+              <select  name="rating" id ="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value ="3">3</option>
+                    <option value ="4">4</option>
+                    <option value ="5">5</option>
+                </select><br><br>
+            &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;
+            <input type="submit" value="Save" style="padding: 20x 10px; height:400px; width:100px;">
+            <br>
+
+            <br>
+            </fieldset>
+    </form>
+   </div>                                       
+</div> 
+   
+        
+     
+    </body>
+
+
+</html>

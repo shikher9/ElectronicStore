@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/settings.css">
+        <title>Account Settings</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar">
+                <div class="navbar-container">
+                    <a  href="products.php"> Products </a> &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+                    <a  href="settings.html">Account</a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    <a  href="shoppingcart.php"> View Shopping Cart </a> &nbsp;&nbsp;&nbsp;
+                    <a  href="history.php"> History </a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    <a  href="customercare.html"> Customer Care &nbsp;&nbsp;&nbsp;&nbsp;
+                   <a class="logout-link" href="index1.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        
+<div id="container" style="width:100%;">                                   
+  <div id="left" style="float:left; width:50%;"> <br><br>
+  <form action="settings.php" method="post" style="padding-right:50px; padding-left:50px;">
+   <fieldset>
+        <br><br>
+        <legend> &nbsp; Edit Your Account Settings &nbsp;</legend>
+            <label for="username-input" style="padding-left:30px">Username</label><br>
+            <input id="username-input" type="text" name="username" required><br>
+            <label for="email-input" style="padding-left:30px">Email</label><br>
+            <input id="email-input" type="email" name="email" required><br>
+            <label for="old-password-input" style="padding-left:30px">Old Password</label><br>
+            <input id="old-password-input" type="password" name="oldpassword" required><br>
+            <label for="new-password-input" style="padding-left:30px">New Password</label><br>
+            <input id="new-password-input" type="password" name="password"><br>
+            <label for="new-password-input-confirm" style="padding-left:30px">Retype New Password</label><br>
+            <input id="new-password-input-confirm" type="password" name="password2"><br>
+            <label style="padding-left:30px" >Gender</label><br>
+            <input type="radio" style= "margin: 0 10px 0 40px;" name="gender" value="Male" style= "padding:7px;"> Male<br>
+            <input type="radio" style="margin: 0 10px 0 40px;" name="gender"  value="Male" checked>Female<br><br>
+            <input type="submit" value="Save the card details" style="text-align: center;display:block;margin: 0 auto;">
+            <br>
+            </fieldset>
+    </form>
+   </div>                     
+        <div id="right" style="float:right; width:50%;"> <br><br>
+                <form action="settings.php" method="post" style="padding-right:50px; padding-left:50px;">
+                <fieldset>
+                <br><br>
+                <legend> &nbsp; Explore our website for more information &nbsp;</legend>
+                    
+                    
+                    <a style="padding-left:20px" href="payment.html"> Payment Methods</a> <br><br><br>
+                    <a style="padding-left:20px" href="address.php"> Address</a><br><br><br>
+                    <a style="padding-left:20px" href="orderHistory.php"> Order History</a><br><br><br>
+                    <a style="padding-left:20px" href="history.php"> Search History</a><br><br><br>
+                    <a style="padding-left:20px" href="shoppingCart.php"> Shopping Cart</a><br><br><br>
+                    <a style="padding-left:20px" href="customercare.html"> Customer care</a><br><br><br>
+                    
+                    </fieldset>
+            </form>
+  </div>                   
+</div> 
+   
+        
+     
+    </body>
+
+
+</html>

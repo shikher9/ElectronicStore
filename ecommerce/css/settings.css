@@ -1,0 +1,18 @@
+body {
+    background: white;
+}
+
+.signup-box label, input[type="text"], input[type="password"], input[type="email"] {
+    margin: 10px;
+    width: 400px;
+    height: 25px;
+}
+
+.navbar-container a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-container a:hover {
+    color: burlywood;
+}

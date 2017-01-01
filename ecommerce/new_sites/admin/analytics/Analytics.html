@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Analytics</title>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            tr:first-child {
+                background-color: #2a73cb;
+                color: white;
+                transition: background-color 0.5s;
+            }
+
+            tr:first-child:hover {
+                background-color: rgba(5, 116, 203, 0.8);
+                color: white;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+
+            .boxShadowSmall {
+                border: 1px solid rgba(103, 103, 103, 0.8);
+                box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 6px rgba(103, 103, 103, 0.5);
+            }
+
+            .navbar {
+                flex-grow: 0;
+                flex-shrink: 0;
+                flex-basis: 50px;
+                background-color: #2a73cb;
+                line-height: 50px;
+                color: white;
+                padding-left: 20px;
+                box-shadow: 0px 8px 18px -6px rgba(0, 0, 0, 0.75);
+            }
+
+            .navbar a {
+                text-decoration: none;
+                color: white;
+            }
+
+            .boxShadowSmall {
+                border: 1px solid rgba(103, 103, 103, 0.8);
+                box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 6px rgba(103, 103, 103, 0.5);
+            }
+
+            .query {
+                display: flex;
+                flex-direction: column;
+                color: white;
+                background-color: #2a73cb;
+                box-sizing: border-box;
+                margin: 10px;
+                padding: 10px;
+                transition-property: background-color, transform;
+                transition-duration: 0.5s;
+                width: 99%;
+            }
+
+            .query:hover {
+                background-color: rgba(5, 116, 203, 0.8);
+                transform: scale(1.01, 1.01);
+            }
+
+            .btn {
+                height: 35px;
+                padding: 8px 10px;
+            }
+
+            #result {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+
+        </style>
+        <script src="jquery-3.1.1.js"></script>
+        <script src="ajaxUtil.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </head>
+    <body style="font-family: 'Ubuntu', sans-serif;margin: 0;width: 100%;">
+        <nav class="navbar">
+            <div class="navbar-container">
+
+
+                <a style="float:left;" class="addProduct-link" href="../../admin.php">Add a Product</a>
+
+                <a style="padding:10px 5px 15px 30px;" class="removeProduct-link" href="../../removeProduct.php">Remove
+                    a
+                    Product</a>
+                <a style="padding:10px 5px 15px 30px;" class="removeProduct-link" href="../manageAccount.php">Manage
+                    Account</a>
+
+                <a style="padding:10px 5px 15px 30px;" class="addProduct-link"
+                   href="Analytics.html">Analytics</a>
+
+                <a style="float:right;margin-right: 10px" class="logout-link" href="../../index1.html">Logout</a>
+
+            </div>
+        </nav>
+        <div id="result">
+            <div class="query boxShadowSmall">
+                <div style="display: flex;justify-content: space-between;">
+                    <button class="btn" onclick="previousButton();">
+                        PREVIOUS
+                        QUERY
+                    </button>
+                    <h3 id="description">Description</h3>
+                    <button class="btn" onclick="nextButton();">
+                        NEXT
+                        QUERY
+                    </button>
+                </div>
+                <div id="detail" style="text-align: center;">
+                    Detail
+                </div>
+            </div>
+            <h4 id="query" style="display:inline-block;margin: 10px;"></h4>
+            <div style="width: 99%">
+                <table id="dataTable"
+                       style="float: left;width:40%;margin: 10px;vertical-align: top">
+                </table>
+                <div id="columnchart_material"
+                     style="float: right;width:55%;height:500px;margin: 10px;vertical-align: top"></div>
+            </div>
+        </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+
+        drawEverything(1);
+
+        var start = 1;
+
+        function previousButton() {
+            start--;
+            if (start == 0) {
+                start = 10;
+            }
+            drawEverything(start);
+        }
+
+        function nextButton() {
+            start++;
+            if (start == 11) {
+                start = 1;
+            }
+            drawEverything(start);
+        }
+
+        function drawEverything(queryNumber) {
+
+            document.getElementById("dataTable").innerHTML = "";
+
+
+            var url = "/ecommerce/new_sites/admin/analytics/query.php?queryNumber=" + queryNumber;
+            var reqObj = {};
+
+            ajaxCall("GET", url, reqObj, function (status, resDataJSON) {
+
+                if (status == 200) {
+                    var resData = JSON.parse(resDataJSON);
+                    drawTable(resData.data);
+                    document.getElementById("query").innerHTML = resData.query;
+                    document.getElementById("description").innerHTML = resData.description;
+                    document.getElementById("detail").innerHTML = resData.detail;
+
+
+                    google.charts.load('current', {'packages': ['bar']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable(resData.data);
+
+                        var options = {
+                            chart: {}
+                        };
+
+                        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                        chart.draw(data, options);
+                    }
+                } else {
+                    console.log("Error : ");
+                    console.log(data);
+                }
+            });
+
+            function drawTable(data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    var tableRow = "<tr>";
+
+                    for (var j = 0; j < data[i].length; j++) {
+                        tableRow = tableRow + "<td>" + data[i][j] + "</td>>";
+                    }
+
+                    tableRow = tableRow + "</tr>";
+                    $(tableRow).appendTo("#dataTable");
+                }
+
+            }
+
+        }
+
+
+    </script>
+</html>

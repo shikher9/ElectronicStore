@@ -1,0 +1,67 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    background-color: #2a73cb;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 15px;
+    background-color: #2a73cb;
+    color: white;
+    font-size: 16px;
+}
+
+nav a:hover {
+    background-color: antiquewhite;
+    color: black;
+}
+
+.query {
+    font-style: italic;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.queryForm {
+    padding: 5px;
+}
+
+.queryForm input {
+    margin: 10px;
+}
+
+.queryForm input[type="submit"] {
+    padding: 5px;
+}
+
+.queryForm select {
+    margin: 10px;
+}
+
+h3 {
+    padding: 15px;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin: 15px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

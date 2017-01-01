@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/settings.css">
+        <title>Account Settings</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar">
+                <div class="navbar-container">
+                    <a href="payment.html"> <b>Payment</b> </a> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <a href="products.php"> Products </a> &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <a href="settings.html"> Account </a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <a href="shoppingcart.php"> View Shopping Cart</a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <a href="history.php"> History </a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <a href="customercare.html"> Customer Care </a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <a class="logout-link" href="index1.html">Logout</a>
+                </div>
+            </div>
+            <div id="left" style="float:left; width:50%;"><br><br>
+                <form action="payment.php" method="post" style="padding-right:50px; padding-left:50px;">
+                    <fieldset>
+                        <br><br>
+                        <legend> &nbsp; Payment Details &nbsp;</legend>
+                        <label for="cardholder-name" style="padding-left:30px">Card Holder Name</label><br>
+                        <input id="cardholder-name" type="text" name="cardholder-name" required><br>
+                        <label for="card-number" style="padding-left:30px">Card Number</label><br>
+                        <input id="card-number" type="text" name="card-number" required><br>
+                        <label for="expiration-date" style="padding-left:30px">Expiration Date</label><br><br>
+                        &nbsp; &nbsp;<input id="expiration-date" type="date" name="expiration-date" required><br><br>
+                        <label for="cvv" style="padding-left:30px">CVV</label><br>
+                        <input id="cvv" type="text" name="cvv" required><br>
+                        <label style="padding-left:30px">Choose the payment method</label>
+                        <select name="cardType" id="cardType">
+                            <option value="credit">Credit</option>
+                            <option value="debit">Debit</option>
+                        </select><br><br><br>
+                        <input type="submit" value="Confirm Payment"
+                               style="padding: 10px 20px;display: inline-block;margin-left: 20px"> <br>
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+
+    </body>
+
+
+</html>
